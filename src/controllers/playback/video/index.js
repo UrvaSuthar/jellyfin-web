@@ -33,12 +33,14 @@ import LibraryMenu from '../../../scripts/libraryMenu';
 import { setBackdropTransparency, TRANSPARENCY_LEVEL } from '../../../components/backdrop/backdrop';
 import { pluginManager } from '../../../components/pluginManager';
 import { PluginType } from '../../../types/plugin.ts';
+import { mountPartyOverlay } from '../../../apps/anywhere/player/mount';
 
 function getOpenedDialog() {
     return document.querySelector('.dialogContainer .dialog.opened');
 }
 
 export default function (view) {
+    let unmountParty = null; // anywhere:
     function getDisplayItem(item) {
         if (item.Type === 'TvChannel') {
             const apiClient = ServerConnections.getApiClient(item.ServerId);
@@ -1670,6 +1672,8 @@ export default function (view) {
         setBackdropTransparency(TRANSPARENCY_LEVEL.Full);
     });
     view.addEventListener('viewshow', function () {
+        // anywhere: party overlay
+        if (!unmountParty) unmountParty = mountPartyOverlay(view.querySelector('.anywherePartyMount'));
         try {
             Events.on(playbackManager, 'playerchange', onPlayerChange);
             bindToPlayer(playbackManager.getCurrentPlayer());
@@ -1780,6 +1784,9 @@ export default function (view) {
         headerElement.classList.remove('hide');
     });
     view.addEventListener('viewdestroy', function () {
+        // anywhere:
+        unmountParty?.();
+        unmountParty = null;
         if (self.touchHelper) {
             self.touchHelper.destroy();
             self.touchHelper = null;

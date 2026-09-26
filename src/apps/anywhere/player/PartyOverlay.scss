@@ -1,0 +1,20 @@
+.anywhereParty { position: absolute; inset: 0; pointer-events: none; z-index: 2; color: #fff; font-size: 0.9em; }
+.anywhereParty button, .anywhereParty input, .anywhereParty-sheet { pointer-events: auto; }
+.anywhereParty-avatars { position: absolute; top: 1em; right: 1.2em; display: flex; align-items: center; gap: 0.4em; }
+.anywhereParty-avatar { width: 1.8em; height: 1.8em; border-radius: 50%; background: #8ab4ff; color: #000; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; border: 2px solid #000; margin-left: -0.5em; }
+.anywhereParty-avatar.small { width: 1.3em; height: 1.3em; font-size: 0.75em; margin: 0 0.4em 0 0; }
+.anywhereParty-chip { background: #ffffff22; border: 0; color: #fff; border-radius: 999px; padding: 0.3em 0.8em; cursor: pointer; }
+.anywhereParty-waiting { position: absolute; top: 4em; left: 50%; transform: translateX(-50%); background: #000b; padding: 0.4em 1em; border-radius: 999px; white-space: nowrap; }
+.anywhereParty-bubbles { position: absolute; left: 1.2em; bottom: 9em; display: flex; flex-direction: column; gap: 0.4em; max-width: 40%; }
+.anywhereParty-bubble { background: #0009; padding: 0.4em 0.9em; border-radius: 1em; overflow-wrap: anywhere; animation: anywhereFade 6s forwards; }
+.anywhereParty-float { position: absolute; bottom: 9em; font-size: 2em; animation: anywhereFloat 2.5s ease-out forwards; }
+.anywhereParty-actions { position: absolute; right: 1.2em; bottom: 9em; display: flex; gap: 0.4em; }
+.anywhereParty-picker { position: absolute; bottom: 2.6em; right: 0; background: #141418; border-radius: 999px; padding: 0.3em; display: flex; }
+.anywhereParty-picker button { background: none; border: 0; font-size: 1.5em; cursor: pointer; }
+.anywhereParty-sheet { position: absolute; right: 0; top: 0; bottom: 0; width: min(22em, 100%); background: #141418f2; display: flex; flex-direction: column; padding: 1em; box-sizing: border-box; }
+.anywhereParty-sheetHead { display: flex; justify-content: space-between; margin-bottom: 0.6em; }
+.anywhereParty-sheetHead button { background: none; border: 0; color: #fff; font-size: 1.2em; cursor: pointer; }
+.anywhereParty-log { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 0.4em; overflow-wrap: anywhere; }
+.anywhereParty-sheet input { width: 100%; box-sizing: border-box; background: #222; color: #fff; border: 0; border-radius: 0.5em; padding: 0.7em; }
+@keyframes anywhereFade { 0%, 80% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes anywhereFloat { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-12em); opacity: 0; } }
