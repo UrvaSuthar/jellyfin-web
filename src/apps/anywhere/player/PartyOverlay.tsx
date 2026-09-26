@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { sendToParty } from '../party/bus';
 import { REACTIONS, waitingText, type PartyMsg } from '../party/protocol';
-import { createBufferAnnouncer } from './bufferAnnouncer';
+import { createBufferAnnouncer, isPartyVideoEvent } from './bufferAnnouncer';
 import { usePartyState } from './usePartyState';
 import './PartyOverlay.scss';
 
@@ -23,16 +23,24 @@ export default function PartyOverlay() {
 
     useEffect(() => {
         if (!inParty) return;
-        const video = document.querySelector<HTMLVideoElement>('video.htmlvideoplayer');
-        if (!video) return;
+        // anywhere: bind on document (capture phase) rather than the current
+        // <video> element — the htmlvideoplayer plugin can swap in a fresh
+        // element mid-party (e.g. next item) without this effect re-running,
+        // which would otherwise leave the announcer on a detached node.
         const a = createBufferAnnouncer(kind => {
             void sendToParty(kind, '');
         });
-        video.addEventListener('waiting', a.onWaiting);
-        video.addEventListener('playing', a.onPlaying);
+        const onWaiting = (e: Event) => {
+            if (isPartyVideoEvent(e)) a.onWaiting();
+        };
+        const onPlaying = (e: Event) => {
+            if (isPartyVideoEvent(e)) a.onPlaying();
+        };
+        document.addEventListener('waiting', onWaiting, true);
+        document.addEventListener('playing', onPlaying, true);
         return () => {
-            video.removeEventListener('waiting', a.onWaiting);
-            video.removeEventListener('playing', a.onPlaying);
+            document.removeEventListener('waiting', onWaiting, true);
+            document.removeEventListener('playing', onPlaying, true);
         };
     }, [inParty]);
 
