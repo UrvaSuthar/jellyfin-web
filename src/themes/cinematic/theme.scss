@@ -1,0 +1,65 @@
+@import '../dark/theme';
+
+[data-theme='cinematic'] {
+    --anywhere-accent: #e50914;
+    --anywhere-bg: #0b0b0f;
+}
+
+html,
+.backgroundContainer,
+.dialog,
+.formDialogHeader {
+    background-color: #0b0b0f;
+}
+
+.skinHeader-withBackground,
+.skinHeader.semiTransparent {
+    background: linear-gradient(#0b0b0fee, #0b0b0f00);
+    backdrop-filter: none;
+}
+
+.button-submit,
+.raised.button-submit,
+.emby-tab-button-active,
+.emby-tab-button.emby-button-foreground,
+.itemProgressBarForeground,
+.emby-slider::-webkit-slider-thumb,
+.mdl-slider-background-lower {
+    background-color: #e50914 !important;
+    color: #fff;
+}
+
+.emby-tab-button-active,
+.emby-tab-button.emby-button-foreground {
+    background: none !important;
+    color: #fff;
+    border-bottom: 2px solid #e50914;
+}
+
+.cardContent,
+.cardImageContainer {
+    border-radius: 8px;
+}
+
+.sectionTitle {
+    font-weight: 800;
+    letter-spacing: 0.01em;
+}
+
+/* Detail page: full-bleed backdrop hero */
+.layout-desktop .itemBackdrop {
+    height: 70vh;
+    mask-image: linear-gradient(#000 60%, transparent);
+}
+
+.detailPagePrimaryContainer .itemName.infoText.parentNameLast,
+.detailPagePrimaryContainer h1 {
+    font-weight: 800;
+    font-size: 2.6em;
+}
+
+.detailButton.btnPlay .detailButton-content {
+    background: #fff;
+    color: #000;
+    border-radius: 999px;
+}

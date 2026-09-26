@@ -8,6 +8,7 @@ declare module '@mui/material/styles' {
     interface ColorSchemeOverrides {
         appletv: true;
         blueradiance: true;
+        cinematic: true;
         purplehaze: true;
         wmc: true;
     }
@@ -99,6 +100,15 @@ const purplehaze = buildCustomColorScheme({
     }
 });
 
+/** Jellyfin Anywhere "Cinematic" scheme. */
+const cinematic = buildCustomColorScheme({
+    palette: {
+        primary: { main: '#e50914' },
+        background: { default: '#0b0b0f', paper: '#141418' },
+        AppBar: { defaultBg: '#0b0b0f' }
+    }
+});
+
 /** The Windows Media Center inspired color scheme. */
 const wmc = buildCustomColorScheme({
     palette: {
@@ -115,6 +125,7 @@ const wmc = buildCustomColorScheme({
 export const COLOR_SCHEMES = {
     appletv,
     blueradiance,
+    cinematic,
     dark: DEFAULT_COLOR_SCHEME,
     light,
     purplehaze,
