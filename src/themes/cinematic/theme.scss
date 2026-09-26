@@ -1,4 +1,4 @@
-@import '../dark/theme';
+@use '../dark/theme';
 
 [data-theme='cinematic'] {
     --anywhere-accent: #e50914;
@@ -20,8 +20,6 @@ html,
 
 .button-submit,
 .raised.button-submit,
-.emby-tab-button-active,
-.emby-tab-button.emby-button-foreground,
 .itemProgressBarForeground,
 .emby-slider::-webkit-slider-thumb,
 .mdl-slider-background-lower {
