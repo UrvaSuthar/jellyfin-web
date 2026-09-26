@@ -34,6 +34,7 @@ import { getPortraitShape, getSquareShape } from 'utils/card';
 import Dashboard from 'utils/dashboard';
 import Events from 'utils/events';
 import { getItemBackdropImageUrl } from 'utils/jellyfin-apiclient/backdropImage';
+import { startParty } from '../../apps/anywhere/party/startParty'; // anywhere:
 
 import 'elements/emby-itemscontainer/emby-itemscontainer';
 import 'elements/emby-checkbox/emby-checkbox';
@@ -334,6 +335,7 @@ function reloadPlayButtons(page, item) {
         hideAll(page, 'btnReplay');
         hideAll(page, 'btnInstantMix');
         hideAll(page, 'btnShuffle');
+        hideAll(page, 'btnWatchTogether'); // anywhere:
     } else if (playbackManager.canPlay(item)) {
         hideAll(page, 'btnPlay', true);
         const enableInstantMix = ['Audio', 'MusicAlbum', 'MusicGenre', 'MusicArtist'].indexOf(item.Type) !== -1;
@@ -344,6 +346,8 @@ function reloadPlayButtons(page, item) {
 
         const isResumable = item.UserData && item.UserData.PlaybackPositionTicks > 0;
         hideAll(page, 'btnReplay', isResumable);
+        // anywhere:
+        hideAll(page, 'btnWatchTogether', ['Movie', 'Episode', 'Video'].includes(item.Type));
 
         for (const btnPlay of page.querySelectorAll('.btnPlay')) {
             if (isResumable) {
@@ -357,6 +361,7 @@ function reloadPlayButtons(page, item) {
         hideAll(page, 'btnReplay');
         hideAll(page, 'btnInstantMix');
         hideAll(page, 'btnShuffle');
+        hideAll(page, 'btnWatchTogether'); // anywhere:
     }
 
     return canPlay;
@@ -2097,6 +2102,7 @@ export default function (view, params) {
 
         bindAll(view, '.btnPlay', 'click', onPlayClick);
         bindAll(view, '.btnReplay', 'click', onPlayClick);
+        bindAll(view, '.btnWatchTogether', 'click', () => startParty(currentItem)); // anywhere:
         bindAll(view, '.btnInstantMix', 'click', onInstantMixClick);
         bindAll(view, '.btnShuffle', 'click', onShuffleClick);
         bindAll(view, '.btnPlayTrailer', 'click', onPlayTrailerClick);
